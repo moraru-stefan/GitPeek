@@ -10,7 +10,7 @@ export default function RepoCard({ repo }: RepoCardProps) {
       href={repo.html_url}
       target="_blank"
       rel="noreferrer"
-      className="flex flex-col gap-2 rounded-lg border border-gray-200 bg-white p-4 transition hover:border-blue-400 hover:shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-500"
+      className="flex flex-col gap-2 rounded-lg border border-gray-200 bg-white p-4 transition hover:border-blue-400 hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:hover:border-blue-500"
     >
       <h3 className="font-medium text-blue-600 dark:text-blue-400">{repo.name}</h3>
 

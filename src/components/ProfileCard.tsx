@@ -25,7 +25,7 @@ export default function ProfileCard({ user }: ProfileCardProps) {
             href={user.html_url}
             target="_blank"
             rel="noreferrer"
-            className="text-sm text-blue-600 hover:underline dark:text-blue-400"
+            className="rounded text-sm text-blue-600 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-blue-400"
           >
             @{user.login}
           </a>
