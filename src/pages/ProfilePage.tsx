@@ -12,7 +12,7 @@ export default function ProfilePage() {
   const { repos, loading: reposLoading, error: reposError } = useGithubRepos(username)
 
   return (
-    <div className="min-h-screen bg-white px-4 py-8 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <div className="px-4 py-8">
       <div className="mx-auto flex max-w-4xl flex-col gap-8">
         {userLoading && <LoadingSpinner />}
 
