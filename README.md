@@ -59,36 +59,18 @@ src/
 
 ## Architecture decisions
 
-**Folder structure by responsibility, not by feature.** With a project
-this small, splitting by technical layer (api / types / hooks /
-components / pages) keeps each concern in one obvious place and avoids
-deciding on a feature-folder convention before there is more than one
-feature.
-
-**A custom hook per data need, no state management library.** `useGithubUser`
-and `useGithubRepos` each wrap one `fetch` call plus its `loading`/`error`/
-data state. There is no cross-component shared state, no caching layer, and
-no derived state that a library like Redux or a query cache would justify.
-Two small hooks are easier to read end to end than a general-purpose data
-layer built for a one-page app.
-
-**Dark mode via Tailwind's class strategy, not a theming library.**
-`useTheme` reads the saved preference (or the OS preference, via
-`prefers-color-scheme`, on first visit) from `localStorage` and toggles a
-`dark` class on `<html>`. Tailwind's `dark:` variants (configured to match
-that class instead of the media query) style both themes without any
-runtime CSS-in-JS or theming framework.
-
-**One error type from the API layer, split into user-facing states in the
-hooks.** `GithubApiError` carries the HTTP status code. Consumers only need
-to check `status === 404` to distinguish "user not found" from a generic
-failure (network issue, rate limit, etc), instead of parsing response
-bodies at the call site.
+- **Folders by responsibility** (api / types / hooks / components / pages),
+  not by feature - the project is too small to need feature folders.
+- **Custom hooks instead of a state library.** `useGithubUser` and
+  `useGithubRepos` each wrap one `fetch` call with its own loading/error
+  state. No shared state or caching layer is needed for a one-page app.
+- **Dark mode via Tailwind's class strategy.** `useTheme` stores the
+  preference in `localStorage` (defaulting to `prefers-color-scheme`) and
+  toggles a `dark` class on `<html>` - no theming library needed.
+- **One `GithubApiError` type** carrying the HTTP status, so hooks just
+  check `status === 404` to tell "not found" apart from other failures.
 
 ## Known limitations
 
-The GitHub API is called without authentication, which caps requests at
-60 per hour per IP address. That is enough to demo the app but will
-produce the generic error state if exceeded during heavy testing. Adding
-an optional personal access token to raise this limit is a possible
-future improvement, not needed for this project's scope.
+Unauthenticated requests to the GitHub API are capped at 60/hour per IP.
+Fine for a demo, but heavy testing can hit the generic error state.
