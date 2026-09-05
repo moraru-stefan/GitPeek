@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+/* Tailwind v4 defaults dark: to prefers-color-scheme; we toggle a class
+   on <html> instead (see useTheme), so dark: must match that class. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+  margin: 0;
+}
